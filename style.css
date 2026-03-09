@@ -18,6 +18,10 @@
     color: var(--offblack);
 }
 
+.hidden {
+    display: none;
+}
+
 body {
     background-color: var(--offwhite);
 }
@@ -54,6 +58,19 @@ nav a {
     padding: 0.75rem 1.5rem;
     border-radius: 10px;
     font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.download:hover,
+.download:focus-visible {
+    background-color: var(--darkgreen);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 7, 45, 0.28);
+}
+
+.download:focus-visible {
+    outline: 2px solid var(--offwhite);
+    outline-offset: 2px;
 }
 
 nav a img {
@@ -95,6 +112,8 @@ nav a img {
     line-height: 1.1;
     width: min(68vw, 44rem);
     z-index: 1;
+    opacity: 0;
+    animation: hero-title-slide-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 140ms forwards;
 }
 
 .skyline h1::after {
@@ -108,6 +127,32 @@ nav a img {
     border-radius: 0.85rem;
     background: var(--darkgreen);
     z-index: -1;
+}
+
+@keyframes hero-title-slide-in {
+    from {
+        transform: translateX(-110%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+body.reveal-ready .scroll-reveal {
+    opacity: 0;
+    transform: translateY(48px) scale(0.985);
+    filter: blur(2px);
+    transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+
+body.reveal-ready .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
 }
 
 .pagetitle {
@@ -211,16 +256,56 @@ h3 {
 .images {
     display: flex;
     justify-content: space-between;
+    gap: 1.2rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
     flex-direction: row;
     width: 80%;
 }
 
-.images img {
+.design-card {
     width: 30%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    outline: none;
+}
+
+.design-card img {
+    width: 100%;
     height: auto;
     border-radius: 16px;
+    display: block;
+    transition: filter 0.25s ease;
+}
+
+.design-overlay {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    background-color: rgba(0, 28, 85, 0.9);
+    color: var(--offwhite);
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    line-height: 1.45;
+    font-size: 1.15em;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.design-card:hover .design-overlay,
+.design-card:focus .design-overlay,
+.design-card:focus-within .design-overlay {
+    opacity: 1;
+}
+
+.design-card:hover img,
+.design-card:focus img,
+.design-card:focus-within img {
+    filter: brightness(0.45);
 }
 
 .pricing {
@@ -238,13 +323,36 @@ h3 {
     margin-top: 2rem;
 }
 
-.options div {
+.options > div {
     padding: 2rem;
     border-radius: 16px;
     width: 40%;
+    height: 12rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.8rem;
+}
+
+.plan-content {
+    position: relative;
+    width: 100%;
+    flex: 1;
+}
+
+.plan-summary,
+.plan-features {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.plan-summary {
+    opacity: 1;
+    transform: translateY(-50%);
 }
 
 .standard {
@@ -257,6 +365,67 @@ h3 {
 
  .premium h3, .premium p {
     color: var(--offwhite);
+}
+
+.plan-features {
+    margin: 0;
+    padding-left: 1.2rem;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(calc(-50% + 0.4rem));
+    pointer-events: none;
+}
+
+.plan-features li {
+    margin-bottom: 0.45rem;
+}
+
+.standard .plan-features,
+.standard .plan-features li {
+    color: var(--offblack);
+}
+
+.premium .plan-features,
+.premium .plan-features li {
+    color: var(--offwhite);
+}
+
+.options > div:hover .plan-features,
+.options > div:focus-within .plan-features {
+    opacity: 1;
+    transform: translateY(-50%);
+    pointer-events: auto;
+}
+
+.options > div:hover .plan-summary,
+.options > div:focus-within .plan-summary {
+    opacity: 0;
+    transform: translateY(calc(-50% - 0.4rem));
+}
+
+@media (hover: none) {
+    .design-overlay {
+        opacity: 1;
+    }
+
+    .design-card img {
+        filter: brightness(0.45);
+    }
+
+    .options > div {
+        height: 20rem;
+    }
+
+    .plan-summary {
+        opacity: 0;
+        transform: translateY(calc(-50% - 0.4rem));
+    }
+
+    .plan-features {
+        opacity: 1;
+        transform: translateY(-50%);
+        pointer-events: auto;
+    }
 }
 
 .premium {
@@ -333,5 +502,18 @@ footer a {
     font-weight: bold;
     background-color: #75A795;
     border-radius: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    background-color: var(--darkgreen);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0, 7, 45, 0.35);
+}
+
+footer a:focus-visible {
+    outline: 2px solid var(--offwhite);
+    outline-offset: 4px;
 }
 
