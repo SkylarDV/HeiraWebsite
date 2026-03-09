@@ -49,6 +49,13 @@ nav a {
     text-decoration: none;
 }
 
+.download {
+    background-color: #75A795;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 nav a img {
     height: 50px;
     margin-right: 10px;
@@ -58,6 +65,7 @@ nav a img {
     width: 45%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .hero {
@@ -326,3 +334,4 @@ footer a {
     background-color: #75A795;
     border-radius: 16px;
 }
+
