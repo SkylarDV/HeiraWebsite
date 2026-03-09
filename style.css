@@ -24,6 +24,7 @@
 
 body {
     background-color: var(--offwhite);
+    overflow-x: hidden;
 }
 
 h1, h2, h3 {
@@ -32,7 +33,7 @@ h1, h2, h3 {
 
 nav {
     background-color: var(--darkblue);
-    height: 70px;
+    min-height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,6 +47,8 @@ nav {
 .navLogo {
     display: flex;
     align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 nav a {
@@ -79,10 +82,10 @@ nav a img {
 }
 
 .scrollnav {
-    width: 45%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    gap: clamp(0.8rem, 1.8vw, 1.8rem);
 }
 
 .hero {
@@ -116,15 +119,24 @@ nav a img {
     animation: hero-title-slide-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 140ms forwards;
 }
 
+@media (min-width: 821px) {
+    .skyline h1 {
+        height: 6.2rem;
+        padding: 0 clamp(4rem, 5vw, 5.5rem) 0 clamp(2.8rem, 7vw, 5.5rem);
+        display: flex;
+        align-items: center;
+    }
+}
+
 .skyline h1::after {
     content: "";
     position: absolute;
-    right: -0.9rem;
+    right: -1.15rem;
     top: 50%;
-    width: 4.6rem;
-    height: 4.6rem;
+    width: 4.2rem;
+    height: 4.2rem;
     transform: translateY(-50%) rotate(45deg);
-    border-radius: 0.85rem;
+    border-radius: 0.62rem;
     background: var(--darkgreen);
     z-index: -1;
 }
@@ -198,7 +210,7 @@ body.reveal-ready .scroll-reveal.is-visible {
 
 .desc {
     background-color: var(--offwhite);
-    width: 80%;
+    width: min(80%, 1100px);
     border-radius: 16px;
     padding: 2rem;
     display: flex;
@@ -211,6 +223,7 @@ body.reveal-ready .scroll-reveal.is-visible {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
 }
 
 .desccontent img {
@@ -260,7 +273,7 @@ h3 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     flex-direction: row;
-    width: 80%;
+    width: min(80%, 1100px);
 }
 
 .design-card {
@@ -298,13 +311,15 @@ h3 {
 
 .design-card:hover .design-overlay,
 .design-card:focus .design-overlay,
-.design-card:focus-within .design-overlay {
+.design-card:focus-within .design-overlay,
+.design-card.is-tapped .design-overlay {
     opacity: 1;
 }
 
 .design-card:hover img,
 .design-card:focus img,
-.design-card:focus-within img {
+.design-card:focus-within img,
+.design-card.is-tapped img {
     filter: brightness(0.45);
 }
 
@@ -319,15 +334,16 @@ h3 {
 .options {
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: min(80%, 1100px);
     margin-top: 2rem;
+    gap: 1.5rem;
 }
 
 .options > div {
     padding: 2rem;
     border-radius: 16px;
     width: 40%;
-    height: 12rem;
+    min-height: 13rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -378,6 +394,7 @@ h3 {
 
 .plan-features li {
     margin-bottom: 0.45rem;
+    line-height: 1.3;
 }
 
 .standard .plan-features,
@@ -391,40 +408,23 @@ h3 {
 }
 
 .options > div:hover .plan-features,
-.options > div:focus-within .plan-features {
+.options > div:focus-within .plan-features,
+.options > div.is-tapped .plan-features {
     opacity: 1;
     transform: translateY(-50%);
     pointer-events: auto;
 }
 
 .options > div:hover .plan-summary,
-.options > div:focus-within .plan-summary {
+.options > div:focus-within .plan-summary,
+.options > div.is-tapped .plan-summary {
     opacity: 0;
     transform: translateY(calc(-50% - 0.4rem));
 }
 
 @media (hover: none) {
-    .design-overlay {
-        opacity: 1;
-    }
-
-    .design-card img {
-        filter: brightness(0.45);
-    }
-
     .options > div {
-        height: 20rem;
-    }
-
-    .plan-summary {
-        opacity: 0;
-        transform: translateY(calc(-50% - 0.4rem));
-    }
-
-    .plan-features {
-        opacity: 1;
-        transform: translateY(-50%);
-        pointer-events: auto;
+        min-height: 15rem;
     }
 }
 
@@ -451,7 +451,7 @@ h3 {
 .profiles {
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: min(80%, 1100px);
     transform: translateY(1.8rem);
 }
 
@@ -498,7 +498,7 @@ footer a {
     color: var(--offwhite);
     text-decoration: none;
     padding: 1.5rem 2.5rem;
-    font-size: 2em;
+    font-size: clamp(1.3rem, 3.6vw, 2rem);
     font-weight: bold;
     background-color: #75A795;
     border-radius: 16px;
@@ -515,5 +515,355 @@ footer a:focus-visible {
 footer a:focus-visible {
     outline: 2px solid var(--offwhite);
     outline-offset: 4px;
+}
+
+@media (max-width: 1100px) {
+    .desc,
+    .images,
+    .options,
+    .profiles {
+        width: 88%;
+    }
+
+    .skyline h1 {
+        width: min(76vw, 40rem);
+    }
+
+    .pagetitle {
+        left: clamp(1.8rem, 4.5vw, 4rem);
+    }
+}
+
+@media (max-width: 820px) {
+    nav {
+        padding: 0.6rem 0.8rem;
+        min-height: 56px;
+    }
+
+    .scrollnav {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 56px;
+        height: 44vh;
+    }
+
+    .skyline {
+        background-size: contain;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: clamp(1rem, 2.5vw, 1.4rem);
+    }
+
+    .pagetitle {
+        position: static;
+        left: auto;
+        top: auto;
+        margin-left: 1rem;
+        margin-bottom: 0.35rem;
+        font-size: clamp(2.2rem, 6.5vw, 3rem);
+    }
+
+    .skyline h1 {
+        position: relative;
+        top: auto;
+        width: min(76vw, 24rem);
+        height: 3.2rem;
+        margin-left: 0;
+        padding: 0 1.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        border-radius: 0 1rem 1rem 0;
+        font-size: clamp(1rem, 2.2vw, 1.4rem);
+    }
+
+    .skyline h1::after {
+        width: 2.15rem;
+        height: 2.15rem;
+        right: -0.35rem;
+    }
+
+    .section-arrow {
+        height: 12rem;
+        margin-bottom: -9rem;
+    }
+
+    .desccontent {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.2rem;
+    }
+
+    .desccontent img {
+        width: min(160px, 34vw);
+        margin-left: 0;
+    }
+
+    .desctext {
+        width: 100%;
+        margin-right: 0;
+        font-size: 0.95rem;
+    }
+
+    .images {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .design-card {
+        width: 33%;
+        max-width: none;
+    }
+
+    .design-overlay {
+        display: flex;
+        opacity: 0;
+        padding: 0.6rem;
+        font-size: 0.72rem;
+        line-height: 1.3;
+    }
+
+    .pricing {
+        padding-top: 3.5rem;
+    }
+
+    .options {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .options > div {
+        width: 50%;
+        min-height: 10rem;
+        padding: 1.2rem;
+    }
+
+    .options h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .plan-summary,
+    .plan-features {
+        position: static;
+        transform: none;
+        transition: none;
+    }
+
+    .plan-summary {
+        opacity: 1;
+        font-size: 0.85rem;
+    }
+
+    .plan-features {
+        display: none;
+    }
+
+    .options > div.is-tapped .plan-summary {
+        display: none;
+    }
+
+    .options > div.is-tapped .plan-features {
+        display: block;
+    }
+
+    .team {
+        margin-top: 3.2rem;
+        padding: 2rem 0 1.5rem;
+        background: linear-gradient(to bottom, #75A795 0 62%, var(--offwhite) 62% 100%);
+    }
+
+    .profiles {
+        transform: none;
+        flex-wrap: nowrap;
+        row-gap: 0;
+        width: 90%;
+    }
+
+    .profile {
+        width: 33%;
+    }
+
+    .profile img {
+        width: 92px;
+    }
+
+    .profile h3 {
+        font-size: 1rem;
+    }
+
+    footer {
+        height: auto;
+        min-height: 150px;
+        margin-top: 2rem;
+        padding: 1.3rem 1rem;
+    }
+}
+
+@media (max-width: 560px) {
+    nav {
+        padding: 0.5rem 0.65rem;
+        min-height: 52px;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    nav a img {
+        height: 34px;
+    }
+
+    .hero {
+        padding-top: 52px;
+        height: 32vh;
+    }
+
+    .skyline {
+        padding-top: 0.8rem;
+    }
+
+    .pagetitle {
+        margin-left: 0.75rem;
+        margin-bottom: 0.25rem;
+        font-size: clamp(1.75rem, 10vw, 2.1rem);
+    }
+
+    .skyline h1 {
+        margin-left: 0;
+        width: min(82vw, 16rem);
+        height: 2rem;
+        padding: 0 1.1rem 0 0.65rem;
+        display: flex;
+        align-items: center;
+        border-radius: 0 0.75rem 0.75rem 0;
+        font-size: 0.68rem;
+        line-height: 1.2;
+    }
+
+    .skyline h1::after {
+        width: 1.35rem;
+        height: 1.35rem;
+        right: -0.2rem;
+    }
+
+    .description {
+        padding: 0.75rem;
+    }
+
+    .desc {
+        width: 94%;
+        padding: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .section-arrow {
+        height: 7rem;
+        margin-bottom: -5.25rem;
+    }
+
+    h2 {
+        font-size: clamp(1.35rem, 6.7vw, 1.6rem);
+    }
+
+    h3 {
+        font-size: clamp(0.9rem, 4.5vw, 1rem);
+    }
+
+    .designs,
+    .pricing {
+        padding-top: 2.25rem;
+    }
+
+    .images {
+        width: 94%;
+        gap: 0.65rem;
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .design-card {
+        width: 66%;
+        max-width: 9rem;
+    }
+
+    .design-overlay {
+        padding: 0.55rem;
+        font-size: 0.68rem;
+        line-height: 1.25;
+        overflow-y: auto;
+    }
+
+    .caption {
+        font-size: 0.72rem;
+        width: 92%;
+        text-align: center;
+    }
+
+    .options {
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .options > div {
+        padding: 0.85rem;
+        width: 100%;
+        min-height: auto;
+        border-radius: 10px;
+    }
+
+    .plan-content {
+        position: static;
+        min-height: auto;
+    }
+
+    .options h3 {
+        font-size: 0.93rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .plan-summary {
+        font-size: 0.68rem;
+        margin-bottom: 0;
+    }
+
+    .options > div.is-tapped .plan-features {
+        display: block;
+        margin-top: 0.3rem;
+        padding-left: 1rem;
+        font-size: 0.68rem;
+        line-height: 1.25;
+    }
+
+    .profiles {
+        width: 92%;
+    }
+
+    .profile {
+        width: 33%;
+    }
+
+    .profile img {
+        width: 62px;
+        margin-bottom: 0.45rem;
+    }
+
+    .profile h3 {
+        font-size: 0.76rem;
+    }
+
+    footer a {
+        width: min(70vw, 12rem);
+        padding: 0.55rem 0.85rem;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
 }
 
