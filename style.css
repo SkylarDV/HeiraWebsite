@@ -102,6 +102,58 @@ nav a img {
     gap: clamp(0.8rem, 1.8vw, 1.8rem);
 }
 
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem;
+    border: 1px solid rgba(242, 242, 239, 0.26);
+    border-radius: 999px;
+    background: rgba(242, 242, 239, 0.08);
+}
+
+.language-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.language-option:hover,
+.language-option:focus-visible {
+    background: rgba(242, 242, 239, 0.16);
+    transform: translateY(-1px);
+}
+
+.language-option:focus-visible {
+    outline: 2px solid var(--offwhite);
+    outline-offset: 2px;
+}
+
+.language-option.is-active {
+    background: var(--offwhite);
+    color: var(--darkblue);
+}
+
+.language-option.is-active .language-label,
+.language-option.is-active .language-flag {
+    color: var(--darkblue);
+}
+
+.language-flag {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.language-label {
+    color: inherit;
+}
+
 .hero {
     --hero-panel-width: 50%;
     --hero-heading-clearance: 13rem;
@@ -770,7 +822,7 @@ h3 {
 }
 
 .premium::after {
-    content: "€4.99 / month";
+    content: "€4.99/m";
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -940,7 +992,17 @@ footer p {
     }
 
     .scrollnav {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .scrollnav .nav-link,
+    .scrollnav .download {
         display: none;
+    }
+
+    .language-switch {
+        margin-left: auto;
     }
 
     .hero {
@@ -1130,6 +1192,15 @@ footer p {
 
     nav a img {
         height: 34px;
+    }
+
+    .language-option {
+        padding: 0.28rem 0.46rem;
+        font-size: 0.75rem;
+    }
+
+    .language-flag {
+        font-size: 0.82rem;
     }
 
     .hero {
