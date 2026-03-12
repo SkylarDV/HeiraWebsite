@@ -1136,6 +1136,12 @@ footer p {
         display: block;
     }
 
+    /* add small top spacing and padding for tapped lists on mid-size mobile */
+    .options > div.is-tapped .plan-features {
+        padding-top: 3rem;
+        padding-left: 1rem;
+    }
+
     .team {
         margin-top: 3.2rem;
         padding: 2rem 0 1.5rem;
@@ -1364,5 +1370,11 @@ footer p {
 
     footer p {
         font-size: 0.72rem;
+    }
+}
+
+@media (hover: none) {
+    .options > div {
+        min-height: 15rem;
     }
 }

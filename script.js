@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const hasTouchInteraction = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    // Treat either touch-capable devices OR narrow viewports as needing tap handling.
+    const hasTouchInteraction = window.matchMedia("(hover: none), (pointer: coarse), (max-width: 820px)").matches;
     if (!hasTouchInteraction) {
         return;
     }
