@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reviewsContainer = document.querySelector(".reviews");
 
     if (reviewsContainer) {
-        initializeReviewsMarquee(reviewsContainer);
+        initializeReviews(reviewsContainer);
     }
 
     const sections = document.querySelectorAll(".info > div[id]");
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-async function initializeReviewsMarquee(container) {
+async function initializeReviews(container) {
     try {
         const response = await fetch("./reviews.json");
         if (!response.ok) {
@@ -192,6 +192,6 @@ async function initializeReviewsMarquee(container) {
         });
         window.addEventListener("resize", updateAnimationDuration);
     } catch (error) {
-        console.error("Could not initialize review marquee", error);
+        console.error("Could not initialize review", error);
     }
 }

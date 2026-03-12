@@ -397,7 +397,7 @@ body.reveal-ready .scroll-reveal.is-visible {
     gap: 1.2rem;
     width: max-content;
     padding-inline: 1.2rem;
-    animation: reviews-marquee var(--reviews-duration) linear infinite;
+    animation: reviews var(--reviews-duration) linear infinite;
     will-change: transform;
 }
 
@@ -474,7 +474,7 @@ body.reveal-ready .scroll-reveal.is-visible {
     color: #697177;
 }
 
-@keyframes reviews-marquee {
+@keyframes reviews {
     from {
         transform: translateX(0);
     }
@@ -810,7 +810,6 @@ h3 {
     border-color: rgba(176, 255, 146, 0.42);
     box-shadow: 0 0 0 1px rgba(176, 255, 146, 0.22), 0 16px 36px rgba(0, 7, 45, 0.32);
     transform-origin: center bottom;
-    animation: premium-float 5s ease-in-out infinite;
 }
 
 .premium::before {
@@ -840,15 +839,6 @@ h3 {
     color: var(--lightgreen);
 }
 
-@keyframes premium-float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-4px);
-    }
-}
 
 .team {
     margin-top: 6rem;
@@ -1376,26 +1366,3 @@ footer p {
         font-size: 0.72rem;
     }
 }
-
-@media (hover: none) {
-    .options > div {
-        min-height: 15rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .reviews-track {
-        animation-duration: calc(var(--reviews-duration) * 1.8);
-    }
-
-    .premium {
-        animation: none;
-    }
-
-    .options > div:hover,
-    .options > div:focus-within,
-    .options > div.is-tapped {
-        transform: translateY(-4px);
-    }
-}
-
