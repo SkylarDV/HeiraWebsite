@@ -169,14 +169,8 @@ nav a img {
     color: var(--darkblue);
 }
 
-.language-option.is-active .language-label,
-.language-option.is-active .language-flag {
+.language-option.is-active .language-label {
     color: var(--darkblue);
-}
-
-.language-flag {
-    font-size: 0.95rem;
-    line-height: 1;
 }
 
 .language-label {
@@ -1202,10 +1196,6 @@ footer p {
     .language-option {
         padding: 0.28rem 0.46rem;
         font-size: 0.75rem;
-    }
-
-    .language-flag {
-        font-size: 0.82rem;
     }
 
     .hero {
